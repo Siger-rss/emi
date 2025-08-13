@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nosso amor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Dancing Script', cursive;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #000;
+      color: #fff;
+    }
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://i.pinimg.com/736x/ee/fb/ef/eefbef3b5c4823a26374a64a91c1df25.jpg') no-repeat center center fixed;
+      background-size: cover;
+      z-index: -1;
+      filter: brightness(0.7);
+    }
+    .container {
+      opacity: 0;
+      transition: opacity 2s ease;
+      padding: 30px;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(5px);
+      text-align: center;
+      color: white;
+      width: 90%;
+      max-width: 500px;
+      box-sizing: border-box;
+      overflow-y: auto;
+      max-height: 90vh;
+      border: 1px solid rgba(255, 105, 180, 0.3);
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #ff6b81;
+      text-shadow: 0 0 10px rgba(255, 107, 129, 0.7);
+    }
+    .counter {
+      font-size: 1.8rem;
+      margin: 20px 0;
+    }
+    .counter span {
+      display: block;
+      margin: 10px 0;
+      font-size: 1.3rem;
+      color: #ffb6c1;
+    }
+    .counter-number {
+      font-size: 2.8rem;
+      font-weight: bold;
+      color: #ff6b81;
+      margin: 5px 0;
+      text-shadow: 0 0 8px rgba(255, 107, 129, 0.7);
+    }
+    p {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: #ffb6c1;
+    }
+    .floating-text {
+      position: absolute;
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.7);
+      font-family: 'Dancing Script', cursive;
+      user-select: none;
+      z-index: -1;
+      animation: float 15s linear infinite;
+    }
+    @keyframes float {
+      0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.7;
+      }
+      90% {
+        opacity: 0.7;
+      }
+      100% {
+        transform: translate(calc(100vw - 100px), calc(-100vh + 100px)) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="background"></div>
+  
+  <!-- Textos flutuantes no fundo -->
+
+  
+  <div class="container">
+    <h1>Eu te amo a </h1>
+    <div class="counter">
+      <div id="months" class="counter-number">0</div>
+      <span>meses</span>
+      <div id="days" class="counter-number">0</div>
+      <span>dias</span>
+      <div id="hours" class="counter-number">0</div>
+      <span>horas</span>
+      <div id="minutes" class="counter-number">0</div>
+      <span>minutos</span>
+      <div id="seconds" class="counter-number">0</div>
+      <span>segundos</span>
+    </div>
+    <p>Desde aquele dia: <strong>16 de Janeiro de 2025</strong> ❤️</p>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <script>
+    // Data do aniversário de namoro - 16 de janeiro de 2025
+    const anniversaryDate = new Date('2025-01-16T00:00:00');
+    
+
+    
+    function updateCounter() {
+      const now = new Date();
+      const diff = now - anniversaryDate;
+      
+      // Calcula meses aproximados (30.44 dias por mês)
+      const totalDays = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const months = Math.floor(totalDays / 30.44);
+      const days = Math.floor(totalDays % 30.44);
+      
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+      
+      document.getElementById('months').textContent = months;
+      document.getElementById('days').textContent = days;
+      document.getElementById('hours').textContent = hours;
+      document.getElementById('minutes').textContent = minutes;
+      document.getElementById('seconds').textContent = seconds;
+    }
+    
+    // Atualiza o contador a cada segundo
+    setInterval(updateCounter, 1000);
+    updateCounter(); // Chama imediatamente para evitar delay inicial
+    
+    window.onload = function() {
+      setTimeout(() => {
+        const container = document.querySelector('.container');
+        container.style.opacity = 1;
+      }, 1000);
+      
+    };
+  </script>
+</body>
+</html>
